@@ -3,10 +3,10 @@ module Day1 (day1) where
 import Data.Char (digitToInt, isDigit)
 import Data.List (isPrefixOf)
 
-day1 :: FilePath -> IO Int
+day1 :: FilePath -> IO String
 day1 path = do
   file <- readFile path
-  pure $ solveFirst file
+  pure $ show (solveFirst file) ++  " and " ++ show (solveSecond file)
 
 solveFirst :: String -> Int
 solveFirst s = sum $ map parseLine (lines s)
@@ -36,11 +36,21 @@ digStrings =
   ]
 
 parseLineWithStrings :: String -> Int
-parseLineWithStrings s = undefined
+parseLineWithStrings s = 10 * parseFromRight digStrings s +  parseFromLeft digStrings (reverse s)
 
-parseFromLeft :: String -> Int
-parseFromLeft [] = error "impossible"
-parseFromLeft s = if snd (head digStrings) `isPrefixOf` s then 1 else parseFromLeft (tail s)
+parseFromLeft :: [(Int, String)] -> String -> Int
+parseFromLeft _ [] = error "impossible"
+parseFromLeft c s = if f c s > 0 || isDigit (head s) then (if isDigit (head s) then digitToInt (head s) else f c s) else parseFromLeft c (tail s)
+  where
+    f [] _ = 0
+    f c' s' = if reverse (snd (head c')) `isPrefixOf` s' then fst (head c') else f (tail c') s'
+
+parseFromRight :: [(Int, String)] -> String -> Int
+parseFromRight _ [] = error "impossible"
+parseFromRight c s = if f c s > 0 || isDigit (head s) then (if isDigit (head s) then digitToInt (head s) else f c s) else parseFromRight c (tail s)
+  where
+    f [] _ = 0
+    f c' s' = if snd (head c') `isPrefixOf` s' then fst (head c') else f (tail c') s'
 
 solveSecond :: String -> Int
 solveSecond s = sum $ map parseLineWithStrings (lines s)
