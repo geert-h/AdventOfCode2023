@@ -1,9 +1,11 @@
 module Main where
 
 import Day1
+import Day2
 import Lib
 
 main :: IO ()
 main = do
-  solday1 <- day1 "resources/day1.txt"
-  putStrLn solday1
+  --solday2 <- day2 "resources/day2.txt"
+  --putStrLn solday2
+  day2 "resources/day2.txt"

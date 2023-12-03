@@ -20,6 +20,16 @@
   (major1) == 4 && (major2) <  16 || \
   (major1) == 4 && (major2) == 16 && (minor) <= 4)
 #endif /* MIN_VERSION_base */
+/* package split-0.2.4 */
+#ifndef VERSION_split
+#define VERSION_split "0.2.4"
+#endif /* VERSION_split */
+#ifndef MIN_VERSION_split
+#define MIN_VERSION_split(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  2 || \
+  (major1) == 0 && (major2) == 2 && (minor) <= 4)
+#endif /* MIN_VERSION_split */
 
 /* tool gcc-10.2.0 */
 #ifndef TOOL_VERSION_gcc
