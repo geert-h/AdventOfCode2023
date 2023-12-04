@@ -1,7 +1,6 @@
 module Day2 (day2) where
-import Data.Char (digitToInt, isDigit)
+import Data.Char (isDigit)
 import Data.List.Split
-import Debug.Trace (traceShowId)
 
 data Game = Game
   { index :: Int,
